@@ -1,7 +1,7 @@
 
 // Store our API endpoint inside queryUrl
-var queryUrl = "https://raw.githubusercontent.com/spearjen/project2v2/spearjay/Resources/sstAll.json";
-var url = "https://raw.githubusercontent.com/spearjen/project2v2/master/Resources/hurricane23.json";
+var queryUrl = "https://raw.githubusercontent.com/spearjen/project2v3/main/Resources/sstAll.json";
+var url = "https://raw.githubusercontent.com/spearjen/project2v3/main/Resources/hurricane23.json";
 var sstData;
 var landfallData;
 
@@ -153,6 +153,9 @@ function onchange (event){
 
 $("#yearSelect").on("click",onchange)
 
+// x=0
+// year=1851
+
 // Perform a GET request to the query URL
 d3.json(queryUrl, function (sstRes) {
     console.log(sstRes);
@@ -170,6 +173,7 @@ d3.json(queryUrl, function (sstRes) {
                 years.push(x.properties.year)
             }
         })
+
         init(years)
 
         sstRes.features = sstRes.features.filter(feature => feature.properties.year == years[x])
@@ -179,3 +183,6 @@ d3.json(queryUrl, function (sstRes) {
         createFeatures(sstRes, landfallRes);
     });
 });
+
+
+
