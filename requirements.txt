@@ -61,7 +61,6 @@ environs==8.0.0
 et-xmlfile==1.0.1
 fastcache==1.1.0
 filelock==3.0.12
-Fiona @ file:///C:/Users/jspea/pipwin/Fiona-1.8.17-cp38-cp38-win_amd64.whl
 flake8 @ file:///tmp/build/80754af9/flake8_1601911421857/work
 Flask==1.1.2
 Flask-Cors==3.0.9
