@@ -32,7 +32,8 @@ function createFeatures(sst, landfall) {
         layer.bindPopup("<b>" + feature.properties.year + "</b>"
             + "<br>Max Temp: <br>" + feature.properties.sea_surface_temp_max + " C"
             + "<br>Min Temp: <br>" + feature.properties.sea_surface_temp_min + " C"
-            + "<br>Average Temp: <br>" + feature.properties.sea_surface_temp_mean + " C"
+            + "<br>Average Temp: <br>" + Math.round(feature.properties.sea_surface_temp_mean*10)/10 + " C"
+            // + "<br>Average Temp: <br>" + Math.round(feature.properties.sea_surface_temp_mean,1) + " C"
             + "<br>Median Temp: <br>" + feature.properties.sea_surface_temp_median + " C");
     }
 
@@ -124,7 +125,7 @@ function createMap(sst, landfall) {
     var myMap = L.map("map", {
         center: [25, -75],
         zoom: 4,
-        layers: [satelitte, sst]
+        layers: [satelitte, sst, landfall]
     });
 
     // Create a layer control
@@ -176,13 +177,18 @@ d3.json(queryUrl, function (sstRes) {
 
         init(years)
 
-        sstRes.features = sstRes.features.filter(feature => feature.properties.year == years[x])
-        landfallRes.features = landfallRes.features.filter(feature => feature.properties.Year == years[x])
+        var sst = sstData.features.filter(feature => feature.properties.year == years[0])
+        var landfall = landfallData.features.filter(feature => feature.properties.Year == years[0])
+        createFeatures(sst, landfall)    
 
-        // // Once we get a response, send the data.features object to the createFeatures function
-        createFeatures(sstRes, landfallRes);
+        // sstRes.features = sstRes.features.filter(feature => feature.properties.year == years[x])
+        // landfallRes.features = landfallRes.features.filter(feature => feature.properties.Year == years[x])
+
+        // // // Once we get a response, send the data.features object to the createFeatures function
+        // createFeatures(sstRes, landfallRes);
     });
 });
+
 
 
 
